@@ -10,12 +10,15 @@ chmod 700 private
 touch index.txt
 echo 1000 > serial
 
-# put openssl.cnf into /root/ca/openssl.cnf
+# put openssl.cnf into /root/intermediate/openssl.cnf
 
 # create root key pair, input 'root' as secret password
+# intermediate.key.pem contains the 'public key' and 'private key' together
 openssl genrsa -aes256 -out private/ca.key.pem 4096
 chmod 400 private/ca.key.pem
 
+# get the 'public key' from the ca.key.pem file
+# openssl rsa -in private/intermediate.key.pem -out private/intermediate.public.pem -outform PEM -pubout
 
 # create root certificate
 openssl req -config openssl.cnf \

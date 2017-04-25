@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 
-# create intermediate ca
+# create intermediate intermediate
 mkdir /root/ca/intermediate
 cd /root/ca/intermediate
 mkdir certs crl csr newcerts private

@@ -1,19 +1,14 @@
 package com.sightcorner.scenario;
 
 
+import com.sightcorner.util.Constant;
 import com.sightcorner.util.Helper;
 
 import javax.crypto.Cipher;
-import java.io.File;
 import java.security.*;
 
 public class EncryptAndDecrypt {
 
-    private static final String MESSAGE = "测试文字，用来验证加密和解密情况";
-    private static final String CERTIFICATE_PATH = new File("src/main/resources/").getAbsolutePath() + "/cert/www.example.com.cert.pem";
-    private static final String PFX_PATH = new File("src/main/resources/").getAbsolutePath() + "/cert/www.example.com.p12";
-    private static final String KEYSTORE_ALIAS = "1";
-    private static final String KEYSTORE_PASSWORD = "p12";
 
 
 
@@ -23,8 +18,8 @@ public class EncryptAndDecrypt {
      */
     public static void main(String[] args) throws Exception {
 
-        PublicKey publicKey = Helper.getPublicKeyFromPath(CERTIFICATE_PATH);
-        PrivateKey privateKey = Helper.getPrivateKeyFromPFXPath(PFX_PATH, KEYSTORE_ALIAS, KEYSTORE_PASSWORD);
+        PublicKey publicKey = Helper.getPublicKeyFromCertificatePath(Constant.SERVER_CERT_PATH);
+        PrivateKey privateKey = Helper.getPrivateKeyFromPFXPath(Constant.SERVER_PFX_PATH, Constant.SERVER_KEYSTORE_ALIAS, Constant.SERVER_KEYSTORE_PASSWORD);
 
         /**
          * 1. 公钥加密 私钥解密
@@ -39,7 +34,7 @@ public class EncryptAndDecrypt {
     }
 
     private static void encryptAndDecrypt(Key encryptKey, Key decryptKey) throws Exception{
-        byte[] b1 = MESSAGE.getBytes();
+        byte[] b1 = Constant.MESSAGE.getBytes();
         byte[] b2 = encryptOrDecrypt(Cipher.ENCRYPT_MODE, b1, encryptKey);
         byte[] b3 = encryptOrDecrypt(Cipher.DECRYPT_MODE, b2, decryptKey);
         output(b1, b2, b3);
