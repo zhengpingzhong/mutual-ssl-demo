@@ -20,9 +20,9 @@ public class Constant {
     private static final String ABSOLUTE_PATH = new File("src/main/resources/").getAbsolutePath();
     //ca
     private static final String CA_ABSOLUTE_PATH = ABSOLUTE_PATH + "/cert/ca/";
-    public static final String CA_CERT_PATH = "";
     public static final String CA_KEY_PATH = CA_ABSOLUTE_PATH + "ca.key.pem";
-    public static final String CA_KEY_PKCS8_PATH = CA_ABSOLUTE_PATH + "ca.pkcs8.key.pem";
+    public static final String CA_CERT_PATH = CA_ABSOLUTE_PATH + "ca.cert.pem";
+    public static final String CA_KEY_PASSPHRASE = "root";
     //intermediate
     private static final String INTERMEDIATE_ABSOLUTE_PATH = ABSOLUTE_PATH + "/cert/intermediate/";
     public static final String INTERMEDIATE_CERT_PATH = INTERMEDIATE_ABSOLUTE_PATH + "intermediate.cert.pem";

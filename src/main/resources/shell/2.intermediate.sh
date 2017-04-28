@@ -15,7 +15,7 @@ cp -p /root/ca/openssl.cnf /root/ca/intermediate/openssl.cnf
 vi /root/ca/intermediate/openssl.cnf
 
 # create intermediate key, input 'intermediate' as secret key
-openssl genrsa -aes256 \
+openssl genrsa -des3 \
       -out private/intermediate.key.pem 4096
 chmod 400 private/intermediate.key.pem
 
