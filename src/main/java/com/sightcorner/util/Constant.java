@@ -27,8 +27,8 @@ public class Constant {
     private static final String INTERMEDIATE_ABSOLUTE_PATH = ABSOLUTE_PATH + "/cert/intermediate/";
     public static final String INTERMEDIATE_CERT_PATH = INTERMEDIATE_ABSOLUTE_PATH + "intermediate.cert.pem";
     public static final String INTERMEDIATE_KEY_PATH = INTERMEDIATE_ABSOLUTE_PATH + "intermediate.key.pem";
-    public static final String INTERMEDIATE_KEY_PASSCODE = "intermediate";
-    public static final String INTERMEDIATE_TRUST_STORE_PATH = INTERMEDIATE_ABSOLUTE_PATH + "intermediate.cert.jks";
+    public static final String INTERMEDIATE_CSR_PATH = INTERMEDIATE_ABSOLUTE_PATH + "intermediate.csr.pem";
+    public static final String INTERMEDIATE_KEY_PASSPHRASE = "intermediate";
     //server
     private static final String SERVER_ABSOLUTE_PATH = ABSOLUTE_PATH + "/cert/server/";
     public static final String SERVER_KEY_PATH = SERVER_ABSOLUTE_PATH + "www.example.com.key.pem";

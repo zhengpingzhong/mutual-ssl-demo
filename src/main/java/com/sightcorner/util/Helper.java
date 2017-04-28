@@ -176,10 +176,10 @@ public class Helper {
      * @return
      * @throws Exception
      */
-    private static Certificate getCertificateFromCertificatePath(String certificatePath) throws Exception {
+    public static X509Certificate getCertificateFromCertificatePath(String certificatePath) throws Exception {
         CertificateFactory certificateFactory = CertificateFactory.getInstance(Constant.CERTIFICATE_TYPE);
         FileInputStream fileInputStream = new FileInputStream(certificatePath);
-        Certificate certificate = certificateFactory.generateCertificate(fileInputStream);
+        X509Certificate certificate = (X509Certificate) certificateFactory.generateCertificate(fileInputStream);
         fileInputStream.close();
         return certificate;
     }

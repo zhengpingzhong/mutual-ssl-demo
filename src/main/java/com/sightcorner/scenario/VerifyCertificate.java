@@ -11,25 +11,27 @@ public class VerifyCertificate {
 
 
     public static void main(String[] args) throws Exception {
-        byte[] data = Constant.MESSAGE.getBytes();
-        byte[] sign = signData(data);
+
+        X509Certificate caCertificate = Helper.getCertificateFromCertificatePath(Constant.SERVER_CERT_PATH);
+        X509Certificate intermediateCertificate = Helper.getCertificateFromCertificatePath(Constant.INTERMEDIATE_CERT_PATH);
+        X509Certificate serverCertificate = Helper.getCertificateFromCertificatePath(Constant.SERVER_CERT_PATH);
 
         /**
-         * 1. 使用 CA 私钥 进行签名
+         * 验证“Intermediate数字证书”是否由“CA”签发
          */
+        caCertificate.verify(intermediateCertificate.getPublicKey());
 
+        /**
+         * 验证“Server数字证书”是否由“Intermediate”签发
+         */
+//        intermediateCertificate.verify(serverCertificate.getPublicKey());
 
 
         /**
-         * 2. 使用 CA 数字证书 验证
+         * 验证“Server数字证书”是否由“CA”签发
          */
+        caCertificate.verify(serverCertificate.getPublicKey());
     }
 
-    private static byte[] signData(byte[] data) throws Exception{
 
-        Signature signature = Signature.getInstance("");
-
-
-        return null;
-    }
 }
