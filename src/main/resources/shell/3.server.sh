@@ -6,7 +6,7 @@
 # For this reason, most websites use 2048-bit pairs.
 
 
-# create a certificate, input 'example' as secret password
+# create a certificate signing request, input 'example' as secret password
 cd /root/ca
 openssl genrsa -des3 \
       -out intermediate/private/www.example.com.key.pem 2048
@@ -14,6 +14,7 @@ chmod 400 intermediate/private/www.example.com.key.pem
 openssl req -config intermediate/openssl.cnf \
       -key intermediate/private/www.example.com.key.pem \
       -new -sha256 -out intermediate/csr/www.example.com.csr.pem
+openssl req -in intermediate/csr/www.example.com.csr.pem -text -noout
 
 # sign the csr
 # if the certificate is going to be used on a server, use the server_cert extension. if the certificate is going to be used for user authentication, use the usr_cert extension.

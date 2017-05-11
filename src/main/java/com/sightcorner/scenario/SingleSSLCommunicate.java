@@ -1,10 +1,12 @@
 package com.sightcorner.scenario;
 
 
-import sun.net.www.http.HttpClient;
 
 import javax.net.ssl.HttpsURLConnection;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.net.URL;
+import java.security.cert.Certificate;
 
 public class SingleSSLCommunicate {
 
@@ -16,6 +18,7 @@ public class SingleSSLCommunicate {
                SSLEnabled="true"
                maxThreads="150" scheme="https" secure="true"
                sslProtocol="TLS" clientAuth="false"
+               keystoreType="PKCS12"
                keystoreFile="/p12/www.example.com.p12"
                keystorePass="p12"
                />
@@ -34,10 +37,32 @@ public class SingleSSLCommunicate {
 
 
     public static void main(String[] args) throws Exception{
-//        String urlPath = "https://www.example.com:8443/";
-//        URL url = new URL(urlPath);
-//        HttpsURLConnection httpsURLConnection ;
+        new SingleSSLCommunicate().connect();
     }
 
+    private void connect() throws Exception{
+        String urlPath = "https://www.example.com:8443/";
+        URL url = new URL(urlPath);
+        HttpsURLConnection httpsURLConnection = (HttpsURLConnection) url.openConnection();
+        printCertificate(httpsURLConnection);
+    }
+
+    private void printCertificate(HttpsURLConnection httpsURLConnection) throws Exception {
+        System.out.println(httpsURLConnection.getResponseCode());
+        System.out.println(httpsURLConnection.getCipherSuite());
+        Certificate[] certificates = httpsURLConnection.getServerCertificates();
+        for(Certificate certificate: certificates) {
+            System.out.println(certificate.getType());
+        }
+
+        System.out.println();
+
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(httpsURLConnection.getInputStream()));
+        String input;
+        while( (input = bufferedReader.readLine()) != null) {
+            System.out.println(input);
+        }
+        bufferedReader.close();
+    }
 
 }
